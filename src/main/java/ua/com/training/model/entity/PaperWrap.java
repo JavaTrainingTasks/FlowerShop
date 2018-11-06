@@ -1,4 +1,4 @@
-package ua.com.training.entity;
+package ua.com.training.model.entity;
 
 public class PaperWrap extends Accessory {
     private String colour;

@@ -1,4 +1,4 @@
-package ua.com.training.entity;
+package ua.com.training.model.entity;
 
 import java.math.BigDecimal;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package ua.com.training.entity;
+package ua.com.training.model.entity;
 
 public class Ribbon {
     private  String colour;

@@ -1,9 +1,9 @@
-package ua.com.training.entity;
+package ua.com.training.model.entity;
 
 import java.math.BigDecimal;
 
 public abstract class Accessory {
-    BigDecimal price;
+    private BigDecimal price;
 
     public void setPrice(BigDecimal price) {
         this.price = price;

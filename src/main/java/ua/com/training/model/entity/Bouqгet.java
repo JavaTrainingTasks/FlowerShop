@@ -1,11 +1,11 @@
-package ua.com.training.entity;
+package ua.com.training.model.entity;
 
 import java.util.ArrayList;
 
 public class Bouqгet {
     private long id;
-    ArrayList<Flower> flowers;
-    ArrayList<Accessory> accessories;
+    private ArrayList<Flower> flowers;
+    private ArrayList<Accessory> accessories;
 
     public static class Builder
     {
