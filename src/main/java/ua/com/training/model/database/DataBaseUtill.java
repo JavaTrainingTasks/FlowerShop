@@ -18,6 +18,7 @@ public class DataBaseUtill {
             return connection;
         } else {
             try {
+                System.out.println(DRIVER);
                 Class.forName(DRIVER);
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
             } catch (SQLException | ClassNotFoundException e) {

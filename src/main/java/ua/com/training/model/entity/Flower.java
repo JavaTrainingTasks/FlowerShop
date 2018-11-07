@@ -39,7 +39,12 @@ public class Flower {
             return this;
         }
 
-        Flower build() {
+        public Builder setColour(String colour) {
+            this.colour = colour;
+            return this;
+        }
+
+        public Flower build() {
             flower = new Flower();
             flower.price = this.price;
             flower.freshness = this.freshness;
