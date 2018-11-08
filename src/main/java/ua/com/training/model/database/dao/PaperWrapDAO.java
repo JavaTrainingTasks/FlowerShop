@@ -30,6 +30,12 @@ public class PaperWrapDAO implements  DAO<PaperWrap>{
     }
 
     @Override
+    public void updateBouquetIdByItemId(long itemID, long index) {
+
+    }
+
+
+    @Override
     public void remove(PaperWrap item) {
         throw new UnsupportedOperationException();
 

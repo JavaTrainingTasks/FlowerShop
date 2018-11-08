@@ -4,27 +4,39 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Bouquet {
-    private long id;
+    private  static long count = 1;
+    private long id = 0;
     private ArrayList<Flower> flowers;
     private ArrayList<Accessory> accessories;
     private BigDecimal price;
 
-    void addFlowers(int amount, Flower flower) {
+    public Bouquet() {
+        flowers = new ArrayList<>();
+        accessories = new ArrayList<>();
+        id = count++;
+
+    }
+
+
+    public void addFlowers(int amount, Flower flower) {
+
         for (int i = 0; i < amount ; i++) {
             flowers.add(flower);
         }
+        calculatePrice();
     }
 
-    void addAccessories(int amount, Accessory accessory) {
+    public void addAccessories(int amount, Accessory accessory) {
         for (int i = 0; i < amount; i++) {
             accessories.add(accessory);
         }
+        calculatePrice();
     }
 
-    BigDecimal calculatePrice() {
+   void calculatePrice() {
         BigDecimal flowersPrice = flowers.stream().map(Flower::getPrice).reduce(BigDecimal.ZERO,BigDecimal::add);
         BigDecimal accessoriesPrice = accessories.stream().map(Accessory::getPrice).reduce(BigDecimal.ZERO,BigDecimal::add);
-        return flowersPrice.add(accessoriesPrice);
+        this.price = flowersPrice.add(accessoriesPrice);
     }
     public BigDecimal getPrice() {
         return price;
@@ -44,6 +56,7 @@ public class Bouquet {
 
     public void setFlowers(ArrayList<Flower> flowers) {
         this.flowers = flowers;
+        calculatePrice();
     }
 
     public ArrayList<Accessory> getAccessories() {
@@ -52,7 +65,12 @@ public class Bouquet {
 
     public void setAccessories(ArrayList<Accessory> accessories) {
         this.accessories = accessories;
+        calculatePrice();
     }
 
 
+    public void addFlower(Flower flower) {
+        flowers.add(flower);
+        calculatePrice();
+    }
 }

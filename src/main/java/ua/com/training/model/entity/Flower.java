@@ -4,12 +4,29 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Flower {
-
+    private long id;
     private BigDecimal price;
     private double freshness;
     private String colour;
     private double length;
     private String name;
+    private long bouquetId;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getBouquetId() {
+        return bouquetId;
+    }
+
+    public void setBouquetId(long bouquetId) {
+        this.bouquetId = bouquetId;
+    }
 
     public  static class Builder {
         private Flower flower;
@@ -18,6 +35,18 @@ public class Flower {
         private double length;
         private String name;
         private String colour;
+        private long id;
+        private long bouquetId;
+
+        public Builder setBouquetId(long bouquetId) {
+            this.bouquetId = bouquetId;
+            return this;
+        }
+
+        public Builder setId(long id) {
+            this.id = id;
+            return this;
+        }
 
         public Builder setPrice(BigDecimal price) {
             this.price = price;
@@ -46,6 +75,8 @@ public class Flower {
 
         public Flower build() {
             flower = new Flower();
+            flower.id = this.id;
+            flower.bouquetId = this.bouquetId;
             flower.price = this.price;
             flower.freshness = this.freshness;
             flower.colour = this.colour;
@@ -112,5 +143,10 @@ public class Flower {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Name  " +this.getName() + " price " + this.getPrice() + " freshness " + this.getFreshness();
     }
 }

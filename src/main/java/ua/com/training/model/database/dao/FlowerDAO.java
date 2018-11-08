@@ -23,6 +23,7 @@ public class FlowerDAO  implements DAO<Flower> {
             preparedStatement.setDouble(3, item.getFreshness());
             preparedStatement.setDouble(4, item.getLength());
             preparedStatement.setBigDecimal(5, item.getPrice());
+            preparedStatement.setLong(6, item.getBouquetId());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,6 +44,21 @@ public class FlowerDAO  implements DAO<Flower> {
     }
 
     @Override
+    public void updateBouquetIdByItemId(long itemID, long index) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(resource.getString("flower.update.bouquet.index"));
+            preparedStatement.setLong(1, index);
+            preparedStatement.setLong(2,itemID);
+            System.out.println(preparedStatement);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    @Override
     public void remove(Flower item) {
         throw new UnsupportedOperationException();
     }
@@ -51,7 +67,8 @@ public class FlowerDAO  implements DAO<Flower> {
     public List<Flower> getAll() {
         try (PreparedStatement preparedStatement =
                      connection.prepareStatement(resource.getString("flower.select.all"))) {
-            return buildFromResultSet(preparedStatement.executeQuery());
+            ResultSet resultSet =preparedStatement.executeQuery();
+            return buildFromResultSet(resultSet);
         } catch (SQLException exception) {
             exception.printStackTrace();
             throw new RuntimeException("getAll in FlowersDAO");
@@ -74,6 +91,7 @@ public class FlowerDAO  implements DAO<Flower> {
                                                 .setFreshness(resultSet.getDouble("FlowerFreshness"))
                                                 .setPrice(resultSet.getBigDecimal("FlowerPrice"))
                                                 .setLength(resultSet.getDouble("FlowerLength"))
+                                                .setId(resultSet.getLong("FlowerId"))
                                                 .build();
             flowers.add(flower);
         }

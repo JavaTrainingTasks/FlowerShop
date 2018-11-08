@@ -1,8 +1,10 @@
 package ua.com.training.model.entity;
 
-public class Ribbon {
+import javax.accessibility.Accessible;
+
+public class Ribbon extends Accessory {
     private  String colour;
-    private String length;
+    private double length;
 
     public String getColour() {
         return colour;
@@ -12,11 +14,12 @@ public class Ribbon {
         this.colour = colour;
     }
 
-    public String getLength() {
+    public double getLength() {
         return length;
     }
 
-    public void setLength(String length) {
+    public void setLength(double length) {
         this.length = length;
     }
+
 }
