@@ -48,7 +48,7 @@ public class NoteDAO implements DAO<Note> {
     }
 
     @Override
-    public Map<AccessoryType, ArrayList<Accessory>> getAll() {
+    public List<Note> getAll() {
 
         try (PreparedStatement preparedStatement =
                      connection.prepareStatement(resource.getString("ribbon.select.all"))) {

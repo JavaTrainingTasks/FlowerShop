@@ -66,7 +66,7 @@ public class FlowerDAO  implements DAO<Flower> {
     }
 
     @Override
-    public Map<AccessoryType, ArrayList<Accessory>> getAll() {
+    public List<Flower> getAll() {
         try (PreparedStatement preparedStatement =
                      connection.prepareStatement(resource.getString("flower.select.all"))) {
             ResultSet resultSet =preparedStatement.executeQuery();

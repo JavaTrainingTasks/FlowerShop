@@ -44,7 +44,7 @@ public class PaperWrapDAO implements  DAO<PaperWrap>{
     }
 
     @Override
-    public Map<AccessoryType, ArrayList<Accessory>> getAll() {
+    public List<PaperWrap>getAll() {
         try (PreparedStatement preparedStatement =
                      connection.prepareStatement(resource.getString("paper.wrap.select.all"))) {
             return buildFromResultSet(preparedStatement.executeQuery());

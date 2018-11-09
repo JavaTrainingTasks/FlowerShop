@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns="/servlet")
-public class SortServlet extends HttpServlet {
+public class Controller extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**

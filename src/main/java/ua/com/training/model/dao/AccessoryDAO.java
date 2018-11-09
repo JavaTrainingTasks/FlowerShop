@@ -47,7 +47,7 @@ public class AccessoryDAO implements DAO<Accessory> {
     }
 
     @Override
-    public Map<AccessoryType, ArrayList<Accessory>> getAll() {
+    public  List<Accessory> getAll() {
         try (PreparedStatement preparedStatement =
                      connection.prepareStatement(resource.getString("accessory.select.all"))) {
             return buildFromResultSet(preparedStatement.executeQuery());
@@ -60,11 +60,10 @@ public class AccessoryDAO implements DAO<Accessory> {
 
 
 
-    private Map<AccessoryType, ArrayList<Accessory>> buildFromResultSet(ResultSet resultSet) throws SQLException {
-        Map<AccessoryType, ArrayList<Accessory>> accessories = new HashMap<>();
-        accessories.put(AccessoryType.NOTE, new ArrayList<>());
-        accessories.put(AccessoryType.PAPER_WRAP, new ArrayList<>());
-
+    private List<Accessory> buildFromResultSet(ResultSet resultSet) throws SQLException {
+        List<Note> notes =  new ArrayList<>();
+        List<PaperWrap> paperWraps = new ArrayList<>();
+        List<Accessory> accessories = new ArrayList<>();
         while (resultSet.next()) {
             if (resultSet.getString("Type") == "NOTE") {
                 Note note = new Note();
@@ -72,7 +71,7 @@ public class AccessoryDAO implements DAO<Accessory> {
                 note.setNoteMessage(resultSet.getString("NoteMessage"));
                 note.setPrice(resultSet.getBigDecimal("AccessoryPrice"));
                 note.setName(resultSet.getString("AccessoryName"));
-                accessories.get(AccessoryType.NOTE).add(note);
+                notes.add(note);
             }
             if (resultSet.getString("Type") == "PAPER_WRAP") {
                 PaperWrap paperWrap = new PaperWrap();
@@ -80,10 +79,12 @@ public class AccessoryDAO implements DAO<Accessory> {
                 paperWrap.setLength(resultSet.getLong("Length"));
                 paperWrap.setPrice(resultSet.getBigDecimal("AccessoryPrice"));
                 paperWrap.setName(resultSet.getString("AccessoryName"));
-                accessories.get(AccessoryType.PAPER_WRAP).add(paperWrap);
+                paperWraps.add(paperWrap);
             }
 
         }
+        accessories.addAll(paperWraps);
+        accessories.addAll(paperWraps);
         return accessories;
     }
     @Override

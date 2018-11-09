@@ -40,7 +40,7 @@ public class Bouquet {
         return flowers;
     }
 
-    public void setFlowers(ArrayList<Flower> flowers) {
+    public void setFlowers(List<Flower> flowers) {
         this.flowers = flowers;
         calculatePrice();
     }
@@ -48,7 +48,7 @@ public class Bouquet {
         return accessories;
     }
 
-    public void setAccessories(HashMap<AccessoryType, ArrayList<Accessory>> accessories) {
+    public void setAccessories(Map<AccessoryType, ArrayList<Accessory>> accessories) {
         this.accessories = accessories;
     }
 
