@@ -1,6 +1,7 @@
-package ua.com.training.model.database.dao;
+package ua.com.training.model.dao;
 
-import ua.com.training.model.database.DataBaseUtill;
+import ua.com.training.model.entity.Accessory;
+import ua.com.training.model.entity.AccessoryType;
 import ua.com.training.model.entity.Flower;
 
 import java.sql.Connection;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FlowerDAO  implements DAO<Flower> {
     private Connection connection = DataBaseUtill.getConnection();
@@ -64,7 +66,7 @@ public class FlowerDAO  implements DAO<Flower> {
     }
 
     @Override
-    public List<Flower> getAll() {
+    public Map<AccessoryType, ArrayList<Accessory>> getAll() {
         try (PreparedStatement preparedStatement =
                      connection.prepareStatement(resource.getString("flower.select.all"))) {
             ResultSet resultSet =preparedStatement.executeQuery();

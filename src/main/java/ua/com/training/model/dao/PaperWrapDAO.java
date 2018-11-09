@@ -1,6 +1,7 @@
-package ua.com.training.model.database.dao;
+package ua.com.training.model.dao;
 
-import ua.com.training.model.database.DataBaseUtill;
+import ua.com.training.model.entity.Accessory;
+import ua.com.training.model.entity.AccessoryType;
 import ua.com.training.model.entity.PaperWrap;
 
 import java.sql.Connection;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PaperWrapDAO implements  DAO<PaperWrap>{
     private Connection connection = DataBaseUtill.getConnection();
@@ -42,7 +44,7 @@ public class PaperWrapDAO implements  DAO<PaperWrap>{
     }
 
     @Override
-    public List<PaperWrap> getAll() {
+    public Map<AccessoryType, ArrayList<Accessory>> getAll() {
         try (PreparedStatement preparedStatement =
                      connection.prepareStatement(resource.getString("paper.wrap.select.all"))) {
             return buildFromResultSet(preparedStatement.executeQuery());
@@ -54,16 +56,7 @@ public class PaperWrapDAO implements  DAO<PaperWrap>{
     }
 
     private List<PaperWrap> buildFromResultSet(ResultSet resultSet) throws SQLException {
-        List<PaperWrap> paperWraps = new ArrayList<>();
-
-        while (resultSet.next()) {
-            PaperWrap paperWrap = new PaperWrap();
-            paperWrap.setColour(resultSet.getString("PaperColour"));
-            paperWrap.setName(resultSet.getString("PaperName"));
-            paperWrap.setPrice(resultSet.getBigDecimal("PaperPrice"));
-            paperWraps.add(paperWrap);
-        }
-        return paperWraps;
+     throw new UnsupportedOperationException();
     }
 
 

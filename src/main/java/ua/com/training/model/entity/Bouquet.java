@@ -1,43 +1,29 @@
 package ua.com.training.model.entity;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Bouquet {
-    private  static long count = 1;
-    private long id = 0;
-    private ArrayList<Flower> flowers;
-    private ArrayList<Accessory> accessories;
+    private long id;
+    private List<Flower> flowers = new ArrayList<>();
+    private Map<AccessoryType,ArrayList<Accessory>> accessories =  new HashMap<>();
     private BigDecimal price;
 
-    public Bouquet() {
-        flowers = new ArrayList<>();
-        accessories = new ArrayList<>();
-        id = count++;
-
-    }
 
 
-    public void addFlowers(int amount, Flower flower) {
 
-        for (int i = 0; i < amount ; i++) {
-            flowers.add(flower);
-        }
-        calculatePrice();
-    }
 
-    public void addAccessories(int amount, Accessory accessory) {
-        for (int i = 0; i < amount; i++) {
-            accessories.add(accessory);
-        }
-        calculatePrice();
-    }
 
-   void calculatePrice() {
+   private void calculatePrice() {
         BigDecimal flowersPrice = flowers.stream().map(Flower::getPrice).reduce(BigDecimal.ZERO,BigDecimal::add);
-        BigDecimal accessoriesPrice = accessories.stream().map(Accessory::getPrice).reduce(BigDecimal.ZERO,BigDecimal::add);
+        BigDecimal accessoriesPrice = BigDecimal.ZERO;
+       for (AccessoryType type:AccessoryType.values()) {
+           accessoriesPrice.add(accessories.get(type).stream().map(Accessory::getPrice)
+                   .reduce(BigDecimal.ZERO,BigDecimal::add));
+       }
         this.price = flowersPrice.add(accessoriesPrice);
     }
+
     public BigDecimal getPrice() {
         return price;
     }
@@ -50,7 +36,7 @@ public class Bouquet {
         this.id = id;
     }
 
-    public ArrayList<Flower> getFlowers() {
+    public List<Flower> getFlowers() {
         return flowers;
     }
 
@@ -58,19 +44,35 @@ public class Bouquet {
         this.flowers = flowers;
         calculatePrice();
     }
-
-    public ArrayList<Accessory> getAccessories() {
+    public Map<AccessoryType, ArrayList<Accessory>> getAccessories() {
         return accessories;
     }
 
-    public void setAccessories(ArrayList<Accessory> accessories) {
+    public void setAccessories(HashMap<AccessoryType, ArrayList<Accessory>> accessories) {
         this.accessories = accessories;
-        calculatePrice();
     }
-
 
     public void addFlower(Flower flower) {
         flowers.add(flower);
         calculatePrice();
     }
+    public void addFlowers(int amount, Flower flower) {
+
+        for (int i = 0; i < amount ; i++) {
+            flowers.add(flower);
+        }
+        calculatePrice();
+    }
+    public void addAccessory(Accessory accessory, AccessoryType type) {
+        accessories.get(type).add(accessory);
+        calculatePrice();
+
+    }
+    public void addAccessories(int amount, Accessory accessory, AccessoryType type) {
+        for (int i = 0; i < amount; i++) {
+            accessories.get(type).add(accessory);
+        }
+        calculatePrice();
+    }
+
 }

@@ -1,14 +1,14 @@
 package ua.com.training.model.entity;
 
 public class PaperWrap extends Accessory {
-    private String colour;
+    private long length;
 
-    public void setColour(String colour) {
-        this.colour = colour;
+    public void setLength(long length) {
+        this.length = length;
     }
 
-    public String getColour() {
-        return colour;
+    public long getLength() {
+        return length;
     }
 
 

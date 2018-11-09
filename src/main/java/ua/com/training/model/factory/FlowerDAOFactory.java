@@ -1,7 +1,7 @@
-package ua.com.training.model.database.factory;
+package ua.com.training.model.factory;
 
-import ua.com.training.model.database.dao.DAO;
-import ua.com.training.model.database.dao.FlowerDAO;
+import ua.com.training.model.dao.DAO;
+import ua.com.training.model.dao.FlowerDAO;
 import ua.com.training.model.entity.Flower;
 
 public class FlowerDAOFactory implements DAOFactory<Flower> {

@@ -1,15 +1,14 @@
-package ua.com.training.model.database.dao;
+package ua.com.training.model.dao;
 
-import ua.com.training.model.database.DataBaseUtill;
 import ua.com.training.model.entity.Accessory;
+import ua.com.training.model.entity.AccessoryType;
 import ua.com.training.model.entity.Bouquet;
-import ua.com.training.model.entity.Flower;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 public class BouquetDAO implements  DAO<Bouquet> {
     private Connection connection = DataBaseUtill.getConnection();
@@ -59,7 +58,7 @@ public class BouquetDAO implements  DAO<Bouquet> {
     }
 
     @Override
-    public List<Bouquet> getAll() {
+    public Map<AccessoryType, ArrayList<Accessory>> getAll() {
         return null;
     }
 

@@ -1,4 +1,4 @@
-package ua.com.training.model.database;
+package ua.com.training.model.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
