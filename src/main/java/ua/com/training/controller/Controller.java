@@ -8,25 +8,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns="/servlet")
+@WebServlet(urlPatterns="")
 public class Controller extends HttpServlet {
-    private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request,response);
+        Command command = getCommand(request);
+        command.init(request, response, getServletContext());
+        command.process();
     }
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) {
-        //doGet(request,response);
-    }
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
+    }
+
+
+
+    private Command getCommand(HttpServletRequest request) {
+        try {
+            Class type;
+            if(request.getParameter("command") == null) {
+                type = Class.forName("ua.com.training.controller.IndexPageCommand");
+            }
+            else {
+                type = Class.forName(String.format("ua.com.training.controller.%sCommand",
+                        request.getParameter("command")));
+            }
+            return (Command) type.asSubclass(Command.class)
+                    .newInstance();
+        } catch (Exception e) {
+            return new UnknownCommand();
+
+        }
     }
 }

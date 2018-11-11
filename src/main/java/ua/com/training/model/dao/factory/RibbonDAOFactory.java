@@ -1,4 +1,4 @@
-package ua.com.training.model.factory;
+package ua.com.training.model.dao.factory;
 
 import ua.com.training.model.dao.DAO;
 import ua.com.training.model.dao.NoteDAO;

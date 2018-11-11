@@ -11,14 +11,16 @@
     <fmt:setBundle basename="messages" var="bundle"/>
     <title><fmt:message key="indexPage" bundle="${bundle}"/></title>
 </head>
-<p></p><a href="?lang=en">
-    <button>EN</button>
-    <p></p></a>
-<a href="?lang=ua">
-    <button>UA</button>
-</a>
+<form action="/" method="get">
+    <button name="lang" type="submit" value="en">EN</button>
+    <button name="lang" type="submit" value="ua">UA</button>
+
+</form>
 <h1><fmt:message key="welcome" bundle="${bundle}"/></h1>
 <h2> <fmt:message key="wannaStart"  bundle="${bundle}"/></h2>
+<form action="/" method="get">
+    <button name="command" type="submit" value="BouquetBuild">Yes!</button>
+</form>
 
 </body>
 </html>
