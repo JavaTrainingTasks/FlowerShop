@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class FlowersFinder {
-    public static ArrayList<Flower> findFlowersInRangeOfFreshness(Bouquet bouquet, double lowerBound, double higherBound) {
-        return bouquet.getFlowers()
+    public static ArrayList<Flower> findFlowersInRangeOfLengths(Bouquet bouquet, double lowerBound, double higherBound) {
+        ArrayList<Flower> flowers = bouquet.getFlowers()
                       .stream()
-                      .filter(flower -> flower.getFreshness() >= lowerBound && flower.getFreshness()<= higherBound)
+                      .filter(flower -> flower.getLength() >= lowerBound && flower.getLength()<= higherBound)
                       .collect(Collectors.toCollection(ArrayList<Flower>::new));
+        System.out.println(flowers);
+        return flowers;
     }
 }

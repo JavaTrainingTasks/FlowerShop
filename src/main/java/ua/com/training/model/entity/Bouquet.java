@@ -4,25 +4,11 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class Bouquet {
-    private long id;
+    private long id = new Random().nextInt(Integer.MAX_VALUE);
     private List<Flower> flowers = new ArrayList<>();
-    private Map<AccessoryType,ArrayList<Accessory>> accessories =  new HashMap<>();
+    private List<Accessory> accessories = new ArrayList<>();
     private BigDecimal price;
 
-
-
-
-
-
-   private void calculatePrice() {
-        BigDecimal flowersPrice = flowers.stream().map(Flower::getPrice).reduce(BigDecimal.ZERO,BigDecimal::add);
-        BigDecimal accessoriesPrice = BigDecimal.ZERO;
-       for (AccessoryType type:AccessoryType.values()) {
-           accessoriesPrice.add(accessories.get(type).stream().map(Accessory::getPrice)
-                   .reduce(BigDecimal.ZERO,BigDecimal::add));
-       }
-        this.price = flowersPrice.add(accessoriesPrice);
-    }
 
     public BigDecimal getPrice() {
         return price;
@@ -44,11 +30,11 @@ public class Bouquet {
         this.flowers = flowers;
         calculatePrice();
     }
-    public Map<AccessoryType, ArrayList<Accessory>> getAccessories() {
+    public List<Accessory> getAccessories() {
         return accessories;
     }
 
-    public void setAccessories(Map<AccessoryType, ArrayList<Accessory>> accessories) {
+    public void setAccessories(List<Accessory> accessories) {
         this.accessories = accessories;
     }
 
@@ -56,23 +42,30 @@ public class Bouquet {
         flowers.add(flower);
         calculatePrice();
     }
-    public void addFlowers(int amount, Flower flower) {
-
-        for (int i = 0; i < amount ; i++) {
-            flowers.add(flower);
-        }
+    public void addFlowers( List flowers) {
+        this.flowers.addAll(flowers);
         calculatePrice();
     }
-    public void addAccessory(Accessory accessory, AccessoryType type) {
-        accessories.get(type).add(accessory);
-        calculatePrice();
+    public void addAccessory( List accessories) {
+       this.accessories.addAll(accessories);
+       calculatePrice();
 
     }
-    public void addAccessories(int amount, Accessory accessory, AccessoryType type) {
-        for (int i = 0; i < amount; i++) {
-            accessories.get(type).add(accessory);
+    private void calculatePrice() {
+        BigDecimal flowersPrice =BigDecimal.ZERO;
+        BigDecimal accessoriesPrice = BigDecimal.ZERO;
+
+        if(flowers != null) {
+            accessoriesPrice = accessoriesPrice.add(flowers.stream().map(Flower::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add));
         }
-        calculatePrice();
+
+        if(accessories != null) {
+            accessoriesPrice = accessoriesPrice
+                    .add(accessories.stream()
+                    .map(Accessory::getPrice)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add));
+        }
+        this.price = accessoriesPrice.add(accessoriesPrice);
     }
 
 }

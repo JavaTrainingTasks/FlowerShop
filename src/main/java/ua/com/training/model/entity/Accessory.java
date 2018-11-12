@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 public  class Accessory {
     private BigDecimal price;
     private String name;
-    static private long count = 0;
     private long id;
     private long bouquetID;
 
@@ -17,9 +16,6 @@ public  class Accessory {
         this.bouquetID = bouquetID;
     }
 
-    public Accessory() {
-        id = count++;
-    }
 
     public long getId() {
         return id;

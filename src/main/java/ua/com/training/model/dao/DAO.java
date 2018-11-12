@@ -3,6 +3,7 @@ package ua.com.training.model.dao;
 import ua.com.training.model.entity.Accessory;
 import ua.com.training.model.entity.AccessoryType;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,5 +23,5 @@ public interface DAO<T> {
 
     List  getAll();
 
-    T getById(Long id);
+    T getById(Long id) throws SQLException;
 }

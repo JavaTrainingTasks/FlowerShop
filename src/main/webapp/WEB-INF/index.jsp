@@ -12,9 +12,9 @@
     <title><fmt:message key="indexPage" bundle="${bundle}"/></title>
 </head>
 <form action="/" method="get">
+    <input type="hidden" name="command" value="ChangeLanguage">
     <button name="lang" type="submit" value="en">EN</button>
     <button name="lang" type="submit" value="ua">UA</button>
-
 </form>
 <h1><fmt:message key="welcome" bundle="${bundle}"/></h1>
 <h2> <fmt:message key="wannaStart"  bundle="${bundle}"/></h2>

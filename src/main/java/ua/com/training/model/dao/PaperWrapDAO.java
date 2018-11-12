@@ -56,13 +56,40 @@ public class PaperWrapDAO implements  DAO<PaperWrap>{
     }
 
     private List<PaperWrap> buildFromResultSet(ResultSet resultSet) throws SQLException {
-     throw new UnsupportedOperationException();
+        List<PaperWrap> paperWraps = new ArrayList<>();
+
+        while (resultSet.next()) {
+            PaperWrap paperWrap = new PaperWrap();
+            paperWrap.setName(resultSet.getString("AccessoryName"));
+            paperWrap.setPrice(resultSet.getBigDecimal("AccessoryPrice"));
+            paperWrap.setId(resultSet.getLong("AccessoryId"));
+            paperWrap.setLength(resultSet.getLong("PaperLength"));
+            paperWraps.add(paperWrap);
+        }
+        return paperWraps;
     }
 
 
 
     @Override
-    public PaperWrap getById(Long id) {
+    public PaperWrap getById(Long id){
+        try (PreparedStatement preparedStatement =
+                     connection.prepareStatement(resource.getString("paper.wrap.select.by.id"))) {
+            preparedStatement.setLong(1,id);
+            System.out.println(preparedStatement);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            PaperWrap paperWrap = new PaperWrap();
+            paperWrap.setName(resultSet.getString("AccessoryName"));
+            paperWrap.setPrice(resultSet.getBigDecimal("AccessoryPrice"));
+            paperWrap.setId(resultSet.getLong("AccessoryId"));
+            paperWrap.setLength(resultSet.getLong("PaperLength"));
+            return paperWrap;
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+
+
+        }
         return null;
     }
 }

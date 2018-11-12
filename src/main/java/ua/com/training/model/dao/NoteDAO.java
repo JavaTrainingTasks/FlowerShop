@@ -51,25 +51,49 @@ public class NoteDAO implements DAO<Note> {
     public List<Note> getAll() {
 
         try (PreparedStatement preparedStatement =
-                     connection.prepareStatement(resource.getString("ribbon.select.all"))) {
+                     connection.prepareStatement(resource.getString("notes.select.all"))) {
             return buildFromResultSet(preparedStatement.executeQuery());
         } catch (SQLException exception) {
             exception.printStackTrace();
-            throw new RuntimeException("getAll in PaperWrapDAO");
+            throw new RuntimeException("getAll in Note");
 
         }
     }
 
     private List<Note> buildFromResultSet(ResultSet resultSet) throws SQLException {
+        List<Note> notes = new ArrayList<>();
 
-     throw new UnsupportedOperationException();
+        while (resultSet.next()) {
+            Note note = new Note();
+                    note.setName(resultSet.getString("AccessoryName"));
+                    note.setPrice(resultSet.getBigDecimal("AccessoryPrice"));
+                    note.setId(resultSet.getLong("AccessoryId"));
+                    note.setNoteMessage(resultSet.getString("NoteMessage"));
+            notes.add(note);
+        }
+        return notes;
 
     }
 
 
     @Override
     public Note getById(Long id) {
-        throw new UnsupportedOperationException();
+        try (PreparedStatement preparedStatement =
+                     connection.prepareStatement(resource.getString("notes.select.by.id"))) {
+            preparedStatement.setLong(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            Note note = new Note();
+            note.setName(resultSet.getString("AccessoryName"));
+            note.setPrice(resultSet.getBigDecimal("AccessoryPrice"));
+            note.setId(resultSet.getLong("AccessoryId"));
+            note.setNoteMessage(resultSet.getString("NoteMessage"));
+            return note;
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            throw new RuntimeException();
+
+        }
 
     }
 }

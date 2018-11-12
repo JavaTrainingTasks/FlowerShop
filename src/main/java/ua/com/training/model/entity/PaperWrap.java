@@ -11,5 +11,8 @@ public class PaperWrap extends Accessory {
         return length;
     }
 
-
+@Override
+    public String toString(){
+        return "price "+getPrice()+ " name "+ getName();
+}
 }

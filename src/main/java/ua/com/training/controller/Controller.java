@@ -1,6 +1,7 @@
 package ua.com.training.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +16,11 @@ public class Controller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Command command = getCommand(request);
         command.init(request, response, getServletContext());
-        command.process();
+        try {
+            command.process();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 

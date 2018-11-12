@@ -80,7 +80,23 @@ public class FlowerDAO  implements DAO<Flower> {
 
     @Override
     public Flower getById(Long id) {
-        throw new UnsupportedOperationException();
+        try (PreparedStatement preparedStatement =
+                     connection.prepareStatement(resource.getString("flower.select.by.id"))) {
+            preparedStatement.setLong(1,id);
+            ResultSet resultSet =preparedStatement.executeQuery();
+            resultSet.next();
+            return new Flower.Builder().setName(resultSet.getString("FlowerName"))
+                    .setColour(resultSet.getString("FlowerColour"))
+                    .setFreshness(resultSet.getDouble("FlowerFreshness"))
+                    .setPrice(resultSet.getBigDecimal("FlowerPrice"))
+                    .setLength(resultSet.getDouble("FlowerLength"))
+                    .setId(resultSet.getLong("FlowerId"))
+                    .build();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            throw new RuntimeException();
+
+        }
     }
 
 

@@ -8,13 +8,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public abstract class Command {
     ServletContext servletContext;
     HttpServletRequest request;
     HttpServletResponse response;
 
-    abstract void process() throws ServletException, IOException;
+    abstract void process() throws ServletException, IOException, SQLException;
 
     void init(HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) {
         this.servletContext = servletContext;
