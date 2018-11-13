@@ -8,65 +8,54 @@ import ua.com.training.model.entity.PaperWrap;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
- * Command for building bouquet from requested flowers and acceessories
+ * Command for building bouquet from requested flowers and accessories
  */
 public class CreateBouquetCommand extends Command {
     @Override
-    void process() throws ServletException, IOException {
+    void process() throws ServletException, IOException, SQLException {
         DAO<Flower> flowerDAO = new FlowerDAO();
         DAO<Note> noteDAO = new NoteDAO();
         DAO<PaperWrap> paperWrapDAO = new PaperWrapDAO();
         DAO<Bouquet> bouquetDAO = new BouquetDAO();
-        String[] flowersId  =request.getParameterValues("flowers");
-        String[] notesId  =request.getParameterValues("notes");
-        String[] paperWrapsId  =request.getParameterValues("paperWraps");
+        String[] flowersId = request.getParameterValues("flowers");
+        String[] notesId = request.getParameterValues("notes");
+        String[] paperWrapsId = request.getParameterValues("paperWraps");
         Bouquet bouquet = new Bouquet();
         bouquetDAO.add(bouquet);
+        try {
+            request.setAttribute("flowers", Optional.ofNullable(flowersId)
+                                                        .map(flowerId -> Arrays.stream(flowersId)
+                                                                                .map(id -> flowerDAO.getById(Long.valueOf(id)))
+                                                                                .collect(Collectors.toList()))
+                                                        .get());
 
-        if(flowersId != null) {
-            List<Flower> flowers = new ArrayList<>();
-            for (String id:flowersId) {
-                try {
-                    flowers.add(flowerDAO.getById(Long.valueOf(id)));
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+            request.setAttribute("notes", Optional.ofNullable(notesId)
+                                                     .map(flowerId -> Arrays.stream(notesId)
+                                                                            .map(id -> noteDAO.getById(Long.valueOf(id)))
+                                                                            .collect(Collectors.toList()))
+                                                     .get());
+            request.setAttribute("paperWraps", Optional.ofNullable(paperWrapsId)
+                                                          .map(paperWrapId -> Arrays.stream(paperWrapsId)
+                                                                                    .map(id -> paperWrapDAO.getById(Long.valueOf(id)))
+                                                                                    .collect(Collectors.toList()))
+                                                          .get());
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            bouquet.addFlowers(flowers);
-            request.setAttribute("flowers",flowers);
+            bouquetDAO.update(bouquet);
+            request.setAttribute("bouquet", bouquet);
+            forward("bouquet");
         }
-        if(notesId != null) {
-            List<Note> notes = new ArrayList<>();
-            for (String id: notesId) {
-                try {
-                    notes.add(noteDAO.getById(Long.valueOf(id)));
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            bouquet.addAccessory(notes);
-            request.setAttribute("notes",notes);
-        }
-        if(paperWrapsId != null) {
-            List<PaperWrap> paperWraps = new ArrayList<> ();
-            for(String id: paperWrapsId) {
-                try {
-                    paperWraps.add(paperWrapDAO.getById(Long.valueOf(id)));
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            bouquet.addAccessory(paperWraps);
-            request.setAttribute("paperWraps", paperWraps);
 
-        }
-        bouquetDAO.update(bouquet);
-        request.setAttribute("bouquet", bouquet);
-        forward("bouquet");
-    }
 }
+

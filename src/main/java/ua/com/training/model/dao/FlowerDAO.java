@@ -97,18 +97,23 @@ public class FlowerDAO  implements DAO<Flower> {
     }
 
 
-    private List<Flower> buildFromResultSet(ResultSet resultSet) throws SQLException {
+    private List<Flower> buildFromResultSet(ResultSet resultSet)  {
         List<Flower> flowers = new ArrayList<>();
+        try {
 
-        while (resultSet.next()) {
-            Flower flower = new Flower.Builder().setName(resultSet.getString("FlowerName"))
-                                                .setColour(resultSet.getString("FlowerColour"))
-                                                .setFreshness(resultSet.getDouble("FlowerFreshness"))
-                                                .setPrice(resultSet.getBigDecimal("FlowerPrice"))
-                                                .setLength(resultSet.getDouble("FlowerLength"))
-                                                .setId(resultSet.getLong("FlowerId"))
-                                                .build();
-            flowers.add(flower);
+            while (resultSet.next()) {
+                Flower flower = new Flower.Builder().setName(resultSet.getString("FlowerName"))
+                        .setColour(resultSet.getString("FlowerColour"))
+                        .setFreshness(resultSet.getDouble("FlowerFreshness"))
+                        .setPrice(resultSet.getBigDecimal("FlowerPrice"))
+                        .setLength(resultSet.getDouble("FlowerLength"))
+                        .setId(resultSet.getLong("FlowerId"))
+                        .build();
+                flowers.add(flower);
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
         }
     return flowers;
     }

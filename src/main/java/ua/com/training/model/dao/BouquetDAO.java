@@ -187,7 +187,7 @@ public class BouquetDAO implements  DAO<Bouquet> {
     }
 
     @Override
-    public Bouquet getById(Long id) throws SQLException {
+    public Bouquet getById(Long id)   {
         try(PreparedStatement preparedStatement = connection.prepareStatement(resource.getString("bouquet.select.by.id"))){
             preparedStatement.setLong(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();

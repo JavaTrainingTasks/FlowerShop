@@ -18,5 +18,5 @@ public interface DAO<T> {
 
     List  getAll();
 
-    T getById(Long id) throws SQLException;
+    T getById(Long id);
 }
