@@ -5,10 +5,8 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
-
     <meta http-equiv="Content-Type" content="text/html; UTF-8">
-
-    <fmt:setLocale value="${ sessionScope.lang}"/>
+    <fmt:setLocale value="${ empty sessionScope.lang ? 'en' : sessionScope.lang}"/>
     <fmt:setBundle basename="messages" var="bundle"/>
     <title><fmt:message key="bouquetBuild" bundle="${bundle}"/></title>
 </head>

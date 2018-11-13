@@ -2,6 +2,9 @@ package ua.com.training.model.entity;
 
 import java.math.BigDecimal;
 
+/**
+ *
+ */
 public  class Accessory {
     private BigDecimal price;
     private String name;
@@ -28,8 +31,6 @@ public  class Accessory {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
-
 
     public void setName(String name) {
         this.name = name;

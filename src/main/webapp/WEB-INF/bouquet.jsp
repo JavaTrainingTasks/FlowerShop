@@ -8,7 +8,7 @@
 
     <meta http-equiv="Content-Type" content="text/html; UTF-8">
 
-    <fmt:setLocale value="${ sessionScope.lang}"/>
+    <fmt:setLocale value="${ empty sessionScope.lang ? 'en' : sessionScope.lang}"/>
     <fmt:setBundle basename="messages" var="bundle"/>
     <title><fmt:message key="yourBouqet" bundle="${bundle}"/></title>
 </head>

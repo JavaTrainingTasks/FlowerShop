@@ -7,10 +7,11 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; UTF-8">
-    <fmt:setLocale value="${ empty param.lang ? 'en' : param.lang}"/>
+    <fmt:setLocale value="${ empty sessionScope.lang ? 'en' : sessionScope.lang}"/>
     <fmt:setBundle basename="messages" var="bundle"/>
     <title><fmt:message key="indexPage" bundle="${bundle}"/></title>
 </head>
+<body>
 <form action="/" method="get">
     <input type="hidden" name="command" value="ChangeLanguage">
     <button name="lang" type="submit" value="en">EN</button>
