@@ -10,10 +10,11 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ * Command for building bouquet from requested flowers and acceessories
+ */
 public class CreateBouquetCommand extends Command {
     @Override
     void process() throws ServletException, IOException {

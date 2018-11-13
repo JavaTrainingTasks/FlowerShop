@@ -3,7 +3,10 @@ package ua.com.training.model.entity;
 import java.math.BigDecimal;
 
 /**
- *
+ * Accessory class is a super class for diferent types of accessories
+ * @author  Yaroslav Kratt
+ * @version 1.0
+ * @since   13.11.18
  */
 public  class Accessory {
     private BigDecimal price;

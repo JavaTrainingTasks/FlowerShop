@@ -10,6 +10,9 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Command for loading page where you can build a bouquet
+ */
 public class BouquetBuildCommand extends Command {
     @Override
     void process() throws ServletException, IOException {

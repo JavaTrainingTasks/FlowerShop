@@ -154,7 +154,6 @@ public class BouquetDAO implements  DAO<Bouquet> {
 
 
     private List getBouquetAccoosseries(Bouquet bouquet) throws SQLException {
-        List<Accessory> accessories = new ArrayList<>();
         ResultSet resultSet;
         try(PreparedStatement preparedStatement = connection.prepareStatement(resource.getString("bouquet.select.accessories"))){
             preparedStatement.setLong(1,bouquet.getId());
@@ -163,16 +162,14 @@ public class BouquetDAO implements  DAO<Bouquet> {
         return buildAccessoryFromResultSet(resultSet);
     }
 
-    private List<Accessory> getBouquetAccoosseriesById(long id) throws SQLException, RuntimeException{
-    List<Accessory> accessories = new ArrayList<>();
+    private List getBouquetAccoosseriesById(long id) throws SQLException, RuntimeException{
         ResultSet resultSet;
         try(PreparedStatement preparedStatement = connection.prepareStatement(resource.getString("bouquet.select.accessories"))){
             preparedStatement.setLong(1,id);
             resultSet = preparedStatement.executeQuery();
         }
         if(!resultSet.isClosed()){
-        buildAccessoryFromResultSet(resultSet);
-            return accessories;
+            return  buildAccessoryFromResultSet(resultSet);
 
         }
         return null;

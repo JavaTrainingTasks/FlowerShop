@@ -2,7 +2,12 @@ package ua.com.training.model.entity;
 
 import java.math.BigDecimal;
 import java.util.*;
-
+/**
+ * Bouquet contains flowers and accessories, it may not contain one of them
+ * @author  Yaroslav Kratt
+ * @version 1.0
+ * @since   13.11.18
+ */
 public class Bouquet {
     private long id = new Random().nextInt(Integer.MAX_VALUE);
     private List<Flower> flowers = new ArrayList<>();
@@ -51,6 +56,10 @@ public class Bouquet {
        calculatePrice();
 
     }
+
+    /**
+     * calculate total price of Bouquet
+     */
     private void calculatePrice() {
         BigDecimal flowersPrice =BigDecimal.ZERO;
         BigDecimal accessoriesPrice = BigDecimal.ZERO;

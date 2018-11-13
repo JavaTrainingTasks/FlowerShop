@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Command to find flowers of bouquet in perset range
+ */
 public class FindInLengthRangeCommand extends Command {
     @Override
     void process() throws ServletException, IOException, SQLException {

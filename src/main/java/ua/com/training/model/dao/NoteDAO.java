@@ -1,7 +1,5 @@
 package ua.com.training.model.dao;
 
-import ua.com.training.model.entity.Accessory;
-import ua.com.training.model.entity.AccessoryType;
 import ua.com.training.model.entity.Note;
 
 import java.sql.Connection;
@@ -10,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class NoteDAO implements DAO<Note> {
     private Connection connection = DataBaseUtill.getConnection();

@@ -3,6 +3,7 @@ package ua.com.training.model.entity;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+
 public class Flower {
     private long id;
     private BigDecimal price;
@@ -125,9 +126,7 @@ public class Flower {
         this.colour = colour;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+    public BigDecimal getPrice() {return price;}
 
     public String getColour() {
         return colour;

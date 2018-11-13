@@ -1,7 +1,6 @@
 package ua.com.training.model.dao;
 
 import ua.com.training.model.entity.Accessory;
-import ua.com.training.model.entity.AccessoryType;
 import ua.com.training.model.entity.Note;
 import ua.com.training.model.entity.PaperWrap;
 
@@ -10,9 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AccessoryDAO implements DAO<Accessory> {
     private Connection connection = DataBaseUtill.getConnection();

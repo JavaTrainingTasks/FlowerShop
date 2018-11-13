@@ -1,12 +1,7 @@
 package ua.com.training.model.dao;
 
-import ua.com.training.model.entity.Accessory;
-import ua.com.training.model.entity.AccessoryType;
-
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public interface DAO<T> {
