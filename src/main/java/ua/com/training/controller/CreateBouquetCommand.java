@@ -1,5 +1,6 @@
 package ua.com.training.controller;
 
+import jdk.nashorn.internal.runtime.ECMAException;
 import ua.com.training.model.dao.*;
 import ua.com.training.model.entity.Bouquet;
 import ua.com.training.model.entity.Flower;
@@ -38,17 +39,27 @@ public class CreateBouquetCommand extends Command {
                                                                                 .map(id -> flowerDAO.getById(Long.valueOf(id)))
                                                                                 .collect(Collectors.toList()))
                                                         .get());
-
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
             request.setAttribute("notes", Optional.ofNullable(notesId)
                                                      .map(flowerId -> Arrays.stream(notesId)
                                                                             .map(id -> noteDAO.getById(Long.valueOf(id)))
                                                                             .collect(Collectors.toList()))
                                                      .get());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
             request.setAttribute("paperWraps", Optional.ofNullable(paperWrapsId)
                                                           .map(paperWrapId -> Arrays.stream(paperWrapsId)
                                                                                     .map(id -> paperWrapDAO.getById(Long.valueOf(id)))
                                                                                     .collect(Collectors.toList()))
                                                           .get());
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
