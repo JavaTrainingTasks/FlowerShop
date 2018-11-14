@@ -65,16 +65,19 @@ public class Bouquet {
         BigDecimal accessoriesPrice = BigDecimal.ZERO;
 
         if(flowers != null) {
-            accessoriesPrice = accessoriesPrice.add(flowers.stream().map(Flower::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add));
+            flowersPrice = flowersPrice.add(flowers
+                    .stream()
+                    .map(Flower::getPrice)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add));
         }
 
         if(accessories != null) {
-            accessoriesPrice = accessoriesPrice
-                    .add(accessories.stream()
-                    .map(Accessory::getPrice)
-                    .reduce(BigDecimal.ZERO, BigDecimal::add));
+            accessoriesPrice = accessoriesPrice.add(accessories
+                            .stream()
+                            .map(Accessory::getPrice)
+                            .reduce(BigDecimal.ZERO, BigDecimal::add));
         }
-        this.price = accessoriesPrice.add(accessoriesPrice);
+        this.price = accessoriesPrice.add(flowersPrice);
     }
 
 }
